@@ -30,10 +30,11 @@ class Mediapipe_Hand_Landmark:
     handedness_list = detection_result.handedness
     annotated_image = np.copy(rgb_image)
 
-    # Loop through the detected hands to visualize.
+    # Loop through the detected hands to visualize
     for idx in range(len(hand_landmarks_list)):
       hand_landmarks = hand_landmarks_list[idx]
       handedness = handedness_list[idx]
+      print(hand_landmarks[0])
 
       # Draw the hand landmarks.
       hand_landmarks_proto = landmark_pb2.NormalizedLandmarkList()
@@ -63,7 +64,7 @@ class Mediapipe_Hand_Landmark:
 
   # Create a hand landmarker instance with the live stream mode:
   def print_result(self, result: HandLandmarkerResult, output_image: mp.Image, timestamp_ms: int):
-      print('hand landmarker result: {}'.format(result))
+      # print('hand landmarker result: {}'.format(result))
       self.results = result
       # print("Output image: {}".format(output_image.numpy_view()))
     
@@ -71,7 +72,8 @@ class Mediapipe_Hand_Landmark:
     options = HandLandmarkerOptions(
         base_options=BaseOptions(model_asset_path=model_path),
         running_mode=VisionRunningMode.LIVE_STREAM,
-        result_callback=self.print_result)
+        result_callback=self.print_result,
+        num_hands=2)
 
     timestamp = 0
     with HandLandmarker.create_from_options(options) as landmarker:
@@ -88,7 +90,7 @@ class Mediapipe_Hand_Landmark:
             landmarker.detect_async(mp_image, timestamp)
 
             if(not (self.results is None)):
-                mp_image_bgr = cv2.cvtColor(self.draw_landmarks_on_image(mp_image.numpy_view(), self.results), cv2.COLOR_RGB2BGR)
+                mp_image_bgr = self.draw_landmarks_on_image(mp_image.numpy_view(), self.results)
                 cv2.imshow('MediaPipe Hand Landmarks', mp_image_bgr)
             else:
                 print("Output image is empty")
