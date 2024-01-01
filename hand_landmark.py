@@ -27,14 +27,16 @@ class Mediapipe_Hand_Landmark:
   
   def draw_landmarks_on_image(self, rgb_image, detection_result):
     hand_landmarks_list = detection_result.hand_landmarks
+    # hand_world_landmarks_list = detection_result.hand_world_landmarks
     handedness_list = detection_result.handedness
     annotated_image = np.copy(rgb_image)
 
     # Loop through the detected hands to visualize
     for idx in range(len(hand_landmarks_list)):
       hand_landmarks = hand_landmarks_list[idx]
+      # hand_world_landmarks = hand_world_landmarks_list[idx]
       handedness = handedness_list[idx]
-      print(hand_landmarks[0])
+      # print(hand_world_landmarks[4])
 
       # Draw the hand landmarks.
       hand_landmarks_proto = landmark_pb2.NormalizedLandmarkList()
