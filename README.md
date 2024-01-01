@@ -1,1 +1,4 @@
-"# signoAI-project" 
+# signoAI-project
+
+
+Sign Language classifier AI
