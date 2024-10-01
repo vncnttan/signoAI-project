@@ -10,8 +10,19 @@ SignoAI is a machine learning model designed to recognize and classify hand gest
 ## Tech Stack
 - Framework: Tensorflow
 - Computer Vision: OpenCV for real-time video input and hand tracking
-- Deep Learning: DCNN for gesture classification
+- Deep Learning: Fully Connected Layer for Gesture Classification
 - MediaPipe: Hand Landmark Detection
+
+## Model Architecture
+Key landmarks of the hand are extracted using mediapipe then passed into the fully connected neural network for classification.
+- Input: Hand gesture image
+- Hand Tracking: Mediapipe is used to detect hand landmarks
+- Fully Connected Layer: Classify gestures into corresponding sign language symbols
+- Output: Predict class (sign) and confidence score
+
+## What I learn:
+- Working with Google media pipe for the first time.
+- Realtime video recognition from user camera, then project/show the result on the real-time camera projection.
 
 ## Future Enhancement
 - <b>Multi-language Support:</b> Expand to support more sign languages and dialects.
